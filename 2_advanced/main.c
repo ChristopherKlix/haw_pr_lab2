@@ -2,6 +2,8 @@
 // includes & defines
 // ---------
 #include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
 
 #define SMALLEST_PRIME 2
 
@@ -13,6 +15,10 @@ int is_prime(int);
 int is_even(int);
 void print_prime_factors(int);
 
+void ui_line(void);
+void ui_headline(char *);
+void ui_subheadline(char *);
+
 
 // ---------
 // execution
@@ -23,7 +29,10 @@ int main(void)
     unsigned int n;
 
     // (U)ser (I)nterface elements
-    printf("Hey, enter a positive number less than 1000 ");
+    system("clear");
+    ui_headline("Welcome to PRIMES!");
+
+    printf("Please, enter a positive number\nless than 1000: ");
 
     // %u is used to format as an `unsigned int`
     // 
@@ -37,6 +46,8 @@ int main(void)
     // 
     // compute & print results
     // ----------------
+    ui_subheadline("EVEN OR ODD?");
+
     if (is_even(n))
     {
         printf("The number %u is even.\n", n);
@@ -52,6 +63,8 @@ int main(void)
     //  
     // compute & print results
     // ----------------
+    ui_subheadline("PRIME OR NOT?");
+
     if (is_prime(n))
     {
         printf("The number %u is a prime.\n", n);
@@ -68,22 +81,28 @@ int main(void)
     //  
     // compute & print results
     // check all numbers up to `n` for prime
-    // 
-    // ! IMPORTANT
-    // 
-    // This is NOT the most efficient nor elegant solution
-    // Computing a prime takes n-iterations
-    // This results in an efficiency of O(n)
-    // 
-    // see advanced version
     // ----------------
-    for (int i = 0; i < n; i++)
+    ui_subheadline("COUNTING PRIMES");
+    int _printed_primes = 0;
+
+    for (int i = 0; i < n; i+=2)
     {
+        if (i == 0) i++;
+
         if (is_prime(i))
         {
-            printf("%i is a prime\n", i);
+            printf("%5i", i);
+            _printed_primes++;
+
+            if ((_printed_primes % 6) == 0)
+            {
+                printf("\n");
+            }
         }
+
     }
+
+    printf("\n");
 
 
     // ----------------
@@ -122,7 +141,8 @@ int main(void)
 // 
 void print_prime_factors(int _n)
 {
-    printf("Computing prime factors\n"); // AVOID printing out of main()
+    ui_subheadline("COUNTING PRIMES");
+    int _printed_factors = 0;
 
     int _f = SMALLEST_PRIME;
 
@@ -131,7 +151,13 @@ void print_prime_factors(int _n)
         if ((_n % _f) == 0)
         {
             _n /= _f;
-            printf("%i ", _f); // AVOID printing out of main()
+            printf("%5i", _f);
+            _printed_factors++;
+
+            if ((_printed_factors % 6) == 0)
+            {
+                printf("\n");
+            }
         }
         else
         {
@@ -142,7 +168,8 @@ void print_prime_factors(int _n)
         }
     } while (_n > 1);
     
-    printf("\n"); // AVOID printing out of main()
+    printf("\n");
+    ui_line();
 
     return;
 }
@@ -227,4 +254,22 @@ int is_prime(int n)
     // 
     // the function returns True (1)
     return 1;
+}
+
+
+void ui_line(void)
+{
+    printf("--------------------------------\n");
+}
+
+void ui_headline(char *txt)
+{
+    printf("--------------------------------\n");
+    printf("        %s\n", txt);
+    printf("--------------------------------\n");
+}
+
+void ui_subheadline(char *txt)
+{
+    printf("\n        %s\n", txt);
 }
