@@ -21,10 +21,22 @@ Each version has a different level of complexitiy. Some elements are not include
 
 ![ADVANCED](https://img.shields.io/badge/ADVANCED-WORK%20IN%20PROGRESS-yellow?style=for-the-badge)
 
-![INSANE](https://img.shields.io/badge/INSANE-WORK%20IN%20PROGRESS-yellow?style=for-the-badge)
+![INSANE](https://img.shields.io/badge/INSANE-WORKS-success?style=for-the-badge)
 
 ### Simple Version
 
 The simplified version is barebones and only "works".
 Please!!!!
 Don't EVER write code like this 😂
+
+### Intermediate Version
+
+...
+
+### Advanced Version
+
+...
+
+### Insane Version
+
+🤪
