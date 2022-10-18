@@ -24,6 +24,11 @@ int main(void)
 
     // (U)ser (I)nterface elements
     printf("Hey, enter a positive number less than 1000 ");
+
+    // %u is used to format as an `unsigned int`
+    // 
+    // note that we provide the ADDRESS of `n`
+    // and NOT `n` itself.
     scanf("%u", &n);
 
     // ----------------
