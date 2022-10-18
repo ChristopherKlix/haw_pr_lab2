@@ -25,6 +25,9 @@ Each version has a different level of complexitiy. Some elements are not include
 
 ### Simple Version
 
+First of all, I'm proud of you!!!
+Admitting that you're stupid is a big step.
+
 The simplified version is barebones and only "works".
 Please!!!!
 Don't EVER write code like this 😂
