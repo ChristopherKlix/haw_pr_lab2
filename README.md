@@ -38,12 +38,24 @@ Don't EVER write code like this 😂
 
 ### Intermediate Version
 
+```
+./1_intermediate/main.c
+```
+
 ...
 
 ### Advanced Version
 
+```
+./2_advanced/main.c
+```
+
 ...
 
 ### Insane Version
+
+```
+./42_insane/main.c
+```
 
 🤪
