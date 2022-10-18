@@ -55,7 +55,7 @@ Don't EVER write code like this 😂
 ### Insane Version
 
 ```
-./42_insane/main.c
+./100000000_insane/main.c
 ```
 
 🤪
