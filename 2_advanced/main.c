@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <time.h>
 
 #define SMALLEST_PRIME 2
 
@@ -11,8 +12,12 @@
 // ---------
 // prototypes
 // ---------
+int check_for_valid_input(unsigned int *);
 int is_prime(int);
 int is_even(int);
+void print_even_or_not(int);
+void print_prime_or_not(int);
+void print_all_primes(int);
 void print_prime_factors(int);
 
 void ui_line(void);
@@ -29,16 +34,21 @@ int main(void)
     unsigned int n;
 
     // (U)ser (I)nterface elements
-    system("clear");
-    ui_headline("Welcome to PRIMES!");
-
-    printf("Please, enter a positive number\nless than 1000: ");
-
+    // 
     // %u is used to format as an `unsigned int`
     // 
     // note that we provide the ADDRESS of `n`
     // and NOT `n` itself.
-    scanf("%u", &n);
+    do
+    {
+        system("clear");
+        ui_headline("Welcome to PRIMES!");
+
+        printf("Please, enter a positive number\nless than 1000: ");
+        scanf("%u", &n);
+    }
+    while (check_for_valid_input(&n));
+
 
     // ----------------
     // TASK 1
@@ -46,16 +56,8 @@ int main(void)
     // 
     // compute & print results
     // ----------------
-    ui_subheadline("EVEN OR ODD?");
+    print_even_or_not(n);
 
-    if (is_even(n))
-    {
-        printf("The number %u is even.\n", n);
-    }
-    else
-    {
-        printf("The number %u is odd.\n", n);
-    }
 
     // ----------------
     // TASK 2
@@ -63,16 +65,7 @@ int main(void)
     //  
     // compute & print results
     // ----------------
-    ui_subheadline("PRIME OR NOT?");
-
-    if (is_prime(n))
-    {
-        printf("The number %u is a prime.\n", n);
-    }
-    else
-    {
-        printf("The number %u is not a prime.\n", n);
-    }
+    print_prime_or_not(n);
 
 
     // ----------------
@@ -82,10 +75,140 @@ int main(void)
     // compute & print results
     // check all numbers up to `n` for prime
     // ----------------
+    print_all_primes(n);
+
+
+    // ----------------
+    // TASK 4
+    // prime factors of `n`
+    //  
+    // compute & print results
+    // 
+    print_prime_factors(n);
+
+
+    // ----------------
+    // TASK 5
+    // GCD of `n` and `m`
+    //  
+    // compute & print results
+    // 
+    // coming soon
+    // ...
+
+    return 0;
+}
+
+
+int check_for_valid_input(unsigned int *_n)
+{
+    if ((int) *_n > 1000)
+    {
+        printf("\nInvalid input: number must be less than 1000\n\n");
+    }
+    else if ((int) *_n < 0)
+    {
+        printf("\nInvalid input: number must be a positive number\n\n");
+    }
+
+    struct timespec ts;
+    ts.tv_sec = 1;
+    ts.tv_nsec = 0;
+
+    printf("    Continuing in 3 second.\n");
+    nanosleep(&ts, &ts);
+    printf("    Continuing in 2 second..\n");
+    nanosleep(&ts, &ts);
+    printf("    Continuing in 1 second...\n");
+    nanosleep(&ts, &ts);
+
+    return 1;
+}
+
+
+// This function computes and prints wether `n` is even or not
+// 
+// Since this code only prints the result
+// to screen, it does NOT have a return value.
+// 
+// To signal this to the programmer, it returns `void`
+// 
+// ! IMPORTANT
+// 
+// This function has SIDE-EFFECTS
+// It does print to the screen without `main()` knowing of it
+// 
+// This should be avoided!
+// 
+void print_even_or_not(int _n)
+{
+    ui_subheadline("EVEN OR ODD?");
+
+    if (is_even(_n))
+    {
+        printf("The number %u is even.\n", _n);
+    }
+    else
+    {
+        printf("The number %u is odd.\n", _n);
+    }
+
+    return;
+}
+
+
+// This function computes and prints wether `n` is a prime
+// 
+// Since this code only prints the result
+// to screen, it does NOT have a return value.
+// 
+// To signal this to the programmer, it returns `void`
+// 
+// ! IMPORTANT
+// 
+// This function has SIDE-EFFECTS
+// It does print to the screen without `main()` knowing of it
+// 
+// This should be avoided!
+// 
+void print_prime_or_not(int _n)
+{
+    ui_subheadline("PRIME OR NOT?");
+
+    if (is_prime(_n))
+    {
+        printf("The number %u is a prime.\n", _n);
+    }
+    else
+    {
+        printf("The number %u is not a prime.\n", _n);
+    }
+
+    return;
+}
+
+
+// This function computes and prints all primes from 0 to `n`
+// 
+// Since this code only prints the result
+// to screen, it does NOT have a return value.
+// 
+// To signal this to the programmer, it returns `void`
+// 
+// ! IMPORTANT
+// 
+// This function has SIDE-EFFECTS
+// It does print to the screen without `main()` knowing of it
+// 
+// This should be avoided!
+// 
+void print_all_primes(int _n)
+{
     ui_subheadline("COUNTING PRIMES");
+
     int _printed_primes = 0;
 
-    for (int i = 0; i < n; i+=2)
+    for (int i = 0; i < _n; i+=2)
     {
         if (i == 0) i++;
 
@@ -99,30 +222,11 @@ int main(void)
                 printf("\n");
             }
         }
-
     }
 
     printf("\n");
 
-
-    // ----------------
-    // TASK 4
-    // prime factors of `n`
-    //  
-    // compute & print results
-    // 
-    print_prime_factors(n);
-
-    // ----------------
-    // TASK 5
-    // GCD of `n` and `m`
-    //  
-    // compute & print results
-    // 
-    // see advanced version for GCD computation
-    // ...
-
-    return 0;
+    return;
 }
 
 // This function computes and prints all prime factors of `n`
@@ -187,9 +291,9 @@ void print_prime_factors(int _n)
 // 
 // This function only simplifies code-readibility
 // 
-int is_even(int n)
+int is_even(int _n)
 {
-    return ((n % 2) == 0);
+    return ((_n % 2) == 0);
 }
 
 
@@ -209,7 +313,7 @@ int is_even(int n)
 // ! IMPORTANT
 // see the advanced version for a more elegant solution
 // 
-int is_prime(int n)
+int is_prime(int _n)
 {
     // Covering edge case of 1 & 2
     // 
@@ -226,24 +330,18 @@ int is_prime(int n)
     // ! IMPORTANT
     // see the advanced version for a more elegant solution
     // 
-    if (n == 1)
-    {
-        return 0;
-    }
+    if (_n == 1) return 0;
+    else if (_n == 2) return 1;
 
-    if (n == 2)
-    {
-        return 1;
-    }
 
     // if it has a factor than it's not a prime
     // 
     // this for-loop iterates over all possible dividers (factors)
     // 
     // if it can find a factor, it returns False (0)
-    for (int i = SMALLEST_PRIME; i < n; i++)
+    for (int i = SMALLEST_PRIME; i < _n; i++)
     {
-        if ((n % i) == 0)
+        if ((_n % i) == 0)
         {
             return 0;
         }
