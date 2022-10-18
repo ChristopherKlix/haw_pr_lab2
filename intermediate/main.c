@@ -86,10 +86,21 @@ int main(void)
     }
 
 
-    // compute prime factors
+    // ----------------
+    // TASK 4
+    // prime factors of `n`
+    //  
+    // compute & print results
+    // 
     print_prime_factors(n);
 
-    // see advanced for GCD computation
+    // ----------------
+    // TASK 5
+    // GCD of `n` and `m`
+    //  
+    // compute & print results
+    // 
+    // see advanced version for GCD computation
     // ...
 
     return 0;
