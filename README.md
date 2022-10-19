@@ -19,7 +19,7 @@ Each version has a different level of complexitiy. Some elements are not include
 
 ![INTERMEDIATE](https://img.shields.io/badge/INTERMEDIATE-WORKS-success?style=for-the-badge)
 
-![ADVANCED](https://img.shields.io/badge/ADVANCED-WORK%20IN%20PROGRESS-yellow?style=for-the-badge)
+![ADVANCED](https://img.shields.io/badge/ADVANCED-WORKS-success?style=for-the-badge)
 
 ![INSANE](https://img.shields.io/badge/INSANE-WORKS-success?style=for-the-badge)
 
