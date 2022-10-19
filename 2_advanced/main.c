@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include <time.h>
+#include <errno.h>
 
 #define SMALLEST_PRIME 2
 
@@ -23,6 +24,8 @@ void print_prime_factors(int);
 void ui_line(void);
 void ui_headline(char *);
 void ui_subheadline(char *);
+
+int msleep(long);
 
 
 // ---------
@@ -47,7 +50,7 @@ int main(void)
         printf("Please, enter a positive number\nless than 1000: ");
         scanf("%u", &n);
     }
-    while (check_for_valid_input(&n));
+    while (!check_for_valid_input(&n));
 
 
     // ----------------
@@ -102,7 +105,7 @@ int main(void)
 
 int check_for_valid_input(unsigned int *_n)
 {
-    if ((int) *_n > 1000)
+    if ((int) *_n >= 1000)
     {
         printf("\nInvalid input: number must be less than 1000\n\n");
     }
@@ -110,19 +113,21 @@ int check_for_valid_input(unsigned int *_n)
     {
         printf("\nInvalid input: number must be a positive number\n\n");
     }
+    else
+    {
+        return 1;
+    }
 
-    struct timespec ts;
-    ts.tv_sec = 1;
-    ts.tv_nsec = 0;
+    fprintf(stderr, "    Try again in 3 second.");
+    msleep(1000);
+    fprintf(stderr, "\033[2K\r");
+    fprintf(stderr, "    Try again in 2 second..");
+    msleep(1000);
+    fprintf(stderr, "\033[2K\r");
+    fprintf(stderr, "    Try again in 1 second...");
+    msleep(1000);
 
-    printf("    Continuing in 3 second.\n");
-    nanosleep(&ts, &ts);
-    printf("    Continuing in 2 second..\n");
-    nanosleep(&ts, &ts);
-    printf("    Continuing in 1 second...\n");
-    nanosleep(&ts, &ts);
-
-    return 1;
+    return 0;
 }
 
 
@@ -224,6 +229,11 @@ void print_all_primes(int _n)
         }
     }
 
+    if (!_printed_primes)
+    {
+        printf("This number has no primes.");
+    }
+
     printf("\n");
 
     return;
@@ -245,7 +255,7 @@ void print_all_primes(int _n)
 // 
 void print_prime_factors(int _n)
 {
-    ui_subheadline("COUNTING PRIMES");
+    ui_subheadline("COMPUTING PRIME FACTORS");
     int _printed_factors = 0;
 
     int _f = SMALLEST_PRIME;
@@ -272,6 +282,11 @@ void print_prime_factors(int _n)
         }
     } while (_n > 1);
     
+    if (!_printed_factors)
+    {
+        printf("This number has no prime factors.");
+    }
+
     printf("\n");
     ui_line();
 
@@ -370,4 +385,25 @@ void ui_headline(char *txt)
 void ui_subheadline(char *txt)
 {
     printf("\n        %s\n", txt);
+}
+
+int msleep(long msec)
+{
+    struct timespec ts;
+    int res;
+
+    if (msec < 0)
+    {
+        errno = EINVAL;
+        return -1;
+    }
+
+    ts.tv_sec = msec / 1000;
+    ts.tv_nsec = (msec % 1000) * 1000000;
+
+    do {
+        res = nanosleep(&ts, &ts);
+    } while (res && errno == EINTR);
+
+    return res;
 }
