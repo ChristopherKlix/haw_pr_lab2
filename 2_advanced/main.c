@@ -341,7 +341,7 @@ int is_prime(int _n)
     // this for-loop iterates over all possible dividers (factors)
     // 
     // if it can find a factor, it returns False (0)
-    for (int i = SMALLEST_PRIME; i < _n; i++)
+    for (int i = SMALLEST_PRIME+1; i < sqrt(_n); i+=2)
     {
         if ((_n % i) == 0)
         {

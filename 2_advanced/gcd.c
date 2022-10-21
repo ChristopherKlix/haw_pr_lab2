@@ -71,10 +71,6 @@ int main(int argc, char const *argv[])
     long _r;
     long gcd;
 
-    if (DEBUG) printf("x: %li\n", _x);
-    if (DEBUG) printf("y: %li\n", _y);
-    if (DEBUG) ui_line();
-
     do
     {
         _r = _x % _y;
@@ -85,10 +81,6 @@ int main(int argc, char const *argv[])
 
     gcd = _x;
 
-    if (DEBUG) printf("x: %li\n", _x);
-    if (DEBUG) printf("y: %li\n", _y);
-    if (DEBUG) printf("_r: %li\n", _r);
-    if (DEBUG) ui_line();
     printf("The GCD(%u,%u) is %li\n", a, b, gcd);
     ui_line();
 
